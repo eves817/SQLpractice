@@ -1,0 +1,472 @@
+﻿@*@{
+        ViewBag.Title = "Home Page";
+    }*@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+
+
+@*<script src="~/Scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.cookie-1.4.1.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/3.4.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>*@
+<script src="https://cdn.staticfile.org/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+
+
+
+<style type="text/css">
+    .photo {
+        width: auto;
+        height: 300px;
+    }
+
+    .photos {
+        height: 300px;
+        display: none;
+        margin-left: auto;
+    }
+
+    /*table{
+        border: 2px solid black;
+    }*/
+
+    #Stock_Data > tr, th, td {
+        border: 2px solid black;
+    }
+
+    th, td {
+        font-size: 27px;
+        text-align: center;
+    }
+    /*td:first-child{
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+    }
+    td:last-child{
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }*/
+
+    .Stock_Data {
+        height: 300px;
+        text-align: center;
+        display: none;
+        margin-left: auto;
+        padding: 2px;
+    }
+    /*#S{
+            display : inline;
+        }*/
+
+    /*#container {
+              overflow: hidden;
+              display:table;
+              width: 100%;
+              color: #000;
+         }*/
+    #Stock_Data_copy {
+        height: 300px;
+    }
+
+    .input-group {
+        display: inline-block; /*position: absolute; left: 50%; top: 58%; margin: -150px ;*/
+    }
+
+    #EMP {
+        width: 50px;
+        height: 50px;
+        border-radius: 99px;
+        position: fixed;
+        bottom: 10%;
+        right: 5%;
+    }
+    /*#EMP:hover {
+        transform: rotate(180deg);
+        border-radius:0em;
+        }*/
+    #START {
+        width: 50px;
+        height: 50px;
+        border-radius: 99px;
+        position: fixed;
+        bottom: 20%;
+        right: 5%;
+    }
+
+
+    @@media only screen and (max-width: 1200px) {
+        .photo {
+            width: auto;
+            height: 270px;
+        }
+
+        #Stock_Data_copy {
+            height: 270px;
+        }
+    }
+
+    @@media only screen and (max-width: 750px) {
+        .photo {
+            width: 100%;
+            height: auto;
+        }
+
+        .Stock_Data {
+            height: auto;
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+    @@media only screen and (max-width: 440px) {
+        .photo {
+            /*width: 100%;
+                    height: auto;*/
+            margin-top: 3px;
+        }
+
+        .Stock_Data {
+            height: auto;
+            width: 100%;
+            text-align: center;
+            display: none;
+            margin-left: auto;
+            margin-top: 3px;
+        }
+    }
+
+
+    /*.A {
+        text-align: center;
+    }*/
+
+</style>
+
+<body>
+    <div class="container">
+        <div class="A jumbotron text-center">
+            <h1>SearchCar</h1>
+            @*@Html.Label("")StockID*@
+            <form>
+                <span class="row">
+                    <span class="input-group">
+                        <input type="text" id="StockID" class="form-control" size="50" placeholder="StockID" />   @*@Html.TextBox("StockID", "", new { placeholder = "StockID",@class="form-control" })*@
+
+                        <button class="btn btn-info" type="button" id="btn"><i class="glyphicon glyphicon-search"></i></button>          @*<input type="button" id="btn" class="btn" />送出*@
+
+                    </span>
+                </span>
+            </form>
+
+        </div>
+        <hr />
+
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2 visible-lg"></div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <table>
+                    @*align="left"*@
+                    <tr>
+                        <td id="photos">  </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 hidden-xs">
+                @*一般版面*@
+                <table class="Stock_Data " id="Stock_Data_copy">
+                    @*align="left"*@
+                    <thead>
+                        <tr>
+                            <th>型號</th>
+                            <th>種類</th>
+                            <th>年/月</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="Model_copy"></td>
+                            <td id="Car_copy"></td>
+                            <td id="Age_copy"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-xs-12 visible-xs">
+                @*小型螢幕才能看見*@
+                <table class="Stock_Data" id="Stock_Data">
+                    @*align="left"*@
+                    <tbody>
+                        <tr>
+                            <th>型號</th>
+                            <td id="Model"></td>
+                        </tr>
+                        <tr>
+                            <th>種類</th>
+                            <td id="Car"></td>
+                        </tr>
+                        <tr>
+                            <th>年/月</th>
+                            <td id="Age"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-2 visible-lg"></div>
+        </div>
+
+        <button type="button" class="btnn btn-info" data-toggle="modal" data-target="#myModal" id="START"><i class="glyphicon glyphicon-star"></i></button>
+        <button type="button" class="btnn btn-info" id="EMP"><i class="glyphicon glyphicon-star-empty"></i></button>
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">我是彈窗</h4>
+                        <button type="button" class="close" data-dismiss="modal">
+                            @*data-dismiss="modal"關閉視窗*@
+                            <span>&times;</span>    @*&times;   X的實體符號*@
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>🕊️🦅🕊️🦅🕊️🦅🕊️🦅🕊️🦅🕊️🦅🕊️🦅</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="Y">Y</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="N">N</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p id="AA">a</p>
+   
+
+</body>
+<hr />
+
+
+<script type="text/javascript">
+
+           //  debugger;
+              //function setCookie(StockID, value, exdays) {
+                //    value = $("#StockID").val();
+                //  var d = new Date();
+                //  d.setTime(d.getTime()+(exdays*24*60*60*1000));
+                //  var expires = "expires="+d.toGMTString();
+                //  document.cookie = StockID + "=" + value + "; " + expires;
+                //    debugger;
+                //}
+
+                function setCookie(value,exdays) {
+                   // HttpCookie name = new HttpCookie("STOCKID");
+                    
+                    var d = new Date();
+                    d.setTime(d.getTime()+(exdays*24*60*60*1000));
+                 // var expires = "expires="+d.toGMTString();
+
+                    document.cookie =value+";";
+                    //var doc = document.cookie;
+                   // console.log(doc);
+                    //Response.Cookies.Add(cookie);
+                  
+    }
+
+                    //function getCookie(StockID){
+                    //var cookies = document.cookie;
+                    //var list = cookies.split("; ");// 解析出名/值對列表
+                    //for(var i =0; i < list.length; i++){
+                    //var arr = list[i].split("=");// 解析出名和值
+                    //if(arr[0]== StockID)
+                    //return decodeURIComponent(arr[1]);// 對cookie值解碼
+                    //}
+                    //return"";
+                    //}
+
+                 
+                //function getCookie(StockID)
+                //{
+                //  var name = StockID + "=";
+                //  var decodedCookie = decodeURIComponent(document.cookie);   //将已编码 URI 中所有能识别的转义序列转换成原字符。
+                //  var ca = decodedCookie.split(';');
+                //  for(var i=0; i<ca.length; i++)
+                //  {
+                //      var c = ca[i].trim();      //trim()修剪字串
+                //      while (c.charAt(0) == ' ') {  c = c.substring(1);  }
+                //      if (c.indexOf(name) == 0)   //indexOf回傳給定元素於陣列中第一個被找到之索引，若不存在於陣列中則回傳 -1。
+                //          return c.substring(name.length, c.length);              
+                //  }
+                //  return "";
+                //}
+
+
+    
+                    //function checkCookie(user_c) {
+                    //  //  var use = document.cookie;
+                    //   // console.log(use);
+                    //    //  var user = Convert.ToString(Request.Cookies["StockID"].Value);
+                    //    var user=getCookie("StockID");
+                    ////  var U = Request.Cookies["StockID"].ToString();
+                    //    if (user != "") {                                                     
+                    //        //if (user_c != "" && user_c != null) {
+                    //        alert("重複輸入");
+                    //            //}
+                    //    } else {
+                    //     //var U = Request.Cookies["StockID"].ToString();
+                    //       // return U;
+                    //        //if (user.indexOf(user_c) == -1) {
+                    //         var A = setCookie("StockID", user_c, 3);
+                    //        return A;
+                    //        //} else {
+
+                    //       // }
+                    //    }                     
+                    //}
+
+                
+        //function checkCookie() {
+        //    var user = getCookie("username");
+        //    var user_c = $("#StockID").val();
+        //  //  var user = $("#StockID").val();
+        //      if (user!=user_c)
+        //      {
+        //          if (user!="" && user!=null)
+        //          {
+        //            alert(user_c);
+        //            setCookie("username", user_c, 3);
+        //            debugger;
+        //        }
+        //      }
+        //      else
+        //      {
+        //           alert("重複登錄");
+        //      }
+         //       }
+
+                 //$.cookie('StockID', $("#StockID").val(), {expires: 7, path: '/' });
+                 //var Stock_K_ID = $.cookie('StockID');
+                 //    debugger;
+
+                
+
+             $(function () {
+                 $("#btn").click(function () {
+
+                     var A = $("#StockID").val();
+                     console.log(A);
+                     //   var c = HttpContext.Current.Request.Cookies["StockID"].Value;
+                     var c = document.cookie;
+                      //var stock_K_ID= checkCookie(user_c);
+                     if (c == "") {
+                         var str = "STOCKID"+"="+A;
+                     } else {
+                         var str = c + "," + A;
+                     }
+                  //  var str = c + "," + A;
+                      setCookie(str,3);
+
+                     var postdata = JSON.stringify({ id: A });  //searchCarInputParameter: SearchCar   //$("#StockID").val()
+                        $.ajax({
+                            url: '@Url.Action("Index", "Home")',
+                            data: postdata,
+                            dataType: "JSON",
+                            async: true,         //false同步請求,會直接執行ajax   //true異步,先跳過ajax，等執行完整體程式碼在執行ajax
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            success:
+                                function (response) {
+                                    $("#container-fluid").empty();   //$("#Model").empty(); //$("#Car").empty(); //$("#Age").empty();
+                                    $("#photos").empty();
+                                    console.log(response.model);
+
+                                    //document.getElementById("S").innerHTML = word;
+                                  //  $("#S").html(word);
+                                    //document.getElementById("Model").innerHTML = response.model;
+                                    $("#Model").html(response.model);
+                                    //document.getElementById("car_picture_title").innerHTML = response.yy+"/"+response.mm+"/"+response.cars;
+                                    $("#Car").html(response.cars);
+                                    $("#Age").html(response.yy + "/" + response.mm);
+                                    $("#Model_copy").html(response.model);
+                                    $("#Car_copy").html(response.cars);
+                                    $("#Age_copy").html(response.yy + "/" + response.mm);
+                                    src = response.photo;
+                                    //var append = "<div>";
+                                    //var append = "<img src='https://www.nikkyocars.com" + src + "' class='photo img-thumbnail' />";
+                                    //append += "</a>";
+                                    //append += "</div>";
+                                    $("#photos").append("<img src='https://www.nikkyocars.com" + src + "' class='photo' />");
+                                    $("#photos").show();
+                                    $("#Stock_Data").show();
+                                    $("#Stock_Data_copy").show();
+                                    //var str = response.str;
+
+                                    $("#AA").html(response.c);
+                                   
+                                    debugger;
+
+
+                                      //$.each(response.words, function(i,val){                                                       
+                                      //    $("#EMP").click(function () {                                     
+                                      //      alert(response.words[i]);    
+                                      //});
+                                      //    });   
+
+                                    //HttpContext context = HttpContext.Current;
+                                    //context.Session["Mode"] = response.model;
+                                    //context.Session["Car"] = response.cars;
+                                    //context.Session["Age"] = response.yy + "/" + response.mm;
+                                    //context.Session["photos"] = photos;
+                                    //response.model = (string)(context.Session["Mode"]);
+                                    //response.cars = (string)(context.Session["Car"]);
+                                    //A = (string)(context.Session["Age"]);
+                                    //response.photos = (string)(context.Session["photos"]);
+
+
+
+
+                                    //sessionStorage.getItem(User);          //獲取指定key的本地儲存的值
+        //sessionStorage
+        //var ca = response.User.split('&');
+        //sessionStorage.setItem("User", ca);  // 將value儲存到key欄位中
+        //localStorage.getItem('User');
+
+                                    //console.log(append);
+                                    //debugger;
+
+                                    //checkCookie();
+                                }
+                        });
+                                     //alert("異步");                                //debugger;
+                   });
+             });
+             $(function () {
+                 $("#Y").click(function () {
+                     alert("按了一個Y");
+                 });
+                 });
+             $(function () {
+                 $("#N").click(function () {
+                     alert("按了一個N");
+                 });
+             });
+             $(function () {
+                        $("#EMP").click(function () {
+                            alert("這是一個普通的按鍵");
+                        });
+             });
+
+        
+</script>
+

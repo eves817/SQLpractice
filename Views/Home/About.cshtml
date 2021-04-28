@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "ViewModel版本";
+}
+<h2>@ViewBag.Title-CarList</h2>
+
+@*<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>*@
+
+
+@*@using (Html.BeginForm("About", "Home", FormMethod.Post))  //using(Html.BeginForm(action-method, controller, FormMethod))
+    {
+        @Html.AntiForgeryToken()*@
+<hr />
+<br />
+<div>
+    @Html.TextBox("StockID", "", new { placeholder = "StockID" })
+    @*<input type="text" id="StockID" class="form-control" placeholder="StockID" />*@   @*@Html.TextBox("StockID", "", new { placeholder = "StockID",@class="form-control" })*@
+    @*<input type="submit" />*@
+    <button class="btn btn-info" type="button" id="btn"><i class="glyphicon glyphicon-search"></i></button>          @*<input type="button" id="btn" class="btn" />送出*@
+</div>
+        @*<body onload="checkCookie()">*@
+@*</body>*@
+
+
+@*}*@
+<script>
+      $(function () {
+          $("#btn").click(function () {
+                  var StockID = $("#StockID").val();
+              @*window.location.href = '@Url.Action("View", "Home")' + '/?StockID=' + StockID;*@
+              window.location.href = '@Url.Action("View", "Home")' + "?StockID=" + StockID;    /* '/?StockID='*/
+                  @*window.location.href = "@Url.Action("View", "Home", new {StockID = StockID})";*@    //C#寫法，無法適用在前端，如果再Controller就可以了
+                 });
+      });
+
+          //  var stock_K_ID = $.cookie('user.stock_k_id');   StockDetail.cshtml 794
+
+
+            //  function setCookie(cname,cvalue,exdays) {
+            //  var d = new Date();
+            //  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+            //  var expires = "expires=" + d.toGMTString();
+            //  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+            //}
+
+            //function getCookie(cname) {
+            //  var name = cname + "=";
+            //  var decodedCookie = decodeURIComponent(document.cookie);
+            //  var ca = decodedCookie.split(';');
+            //  for(var i = 0; i < ca.length; i++) {
+            //    var c = ca[i];
+            //    while (c.charAt(0) == ' ') {
+            //      c = c.substring(1);
+            //    }
+            //    if (c.indexOf(name) == 0) {
+            //      return c.substring(name.length, c.length);
+            //    }
+            //  }
+            //  return "";
+            //}
+
+            //function checkCookie() {
+            //  var user=getCookie("username");
+            //  if (user != "") {
+            //    alert("Welcome again " + user);
+            //  } else {
+            //     user = prompt("Please enter your name:","");
+            //     if (user != "" && user != null) {
+            //       setCookie("username", user, 30);
+            //     }
+            //  }
+            //}
+</script>

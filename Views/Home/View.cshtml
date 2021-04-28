@@ -1,0 +1,63 @@
+﻿@model  SQL5.Models.StockDetailViewModel
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<h2>ShopList</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            圖片
+        </th>
+        <th>
+            型號
+        </th>
+        <th>
+            車型
+        </th>
+        <th>
+            年
+        </th>
+        <th>
+            月
+        </th>
+        <th></th>
+    </tr>
+ 
+    <tr>
+        <td id="photos">        
+           
+        </td>
+        <td>
+            @ViewData["Model"]
+            @Html.DisplayFor(Model => Model.Model)
+        </td>
+        <td>
+            @ViewData["Cars"]
+            @Html.DisplayFor(Model => Model.Cars)
+        </td>
+        <td>
+            @ViewData["Year"]
+            @Html.DisplayFor(Model => Model.Year)
+
+        </td>
+        <td>
+            @ViewData["Month"]
+            @Html.DisplayFor(Model => Model.Month)
+
+        </td>
+      
+    </tr>
+</table>
+<script type="text/javascript">
+   
+    $("#photos").append("<img src='@("https://www.nikkyocars.com" + Model.PhotoUrl)'/>");
+
+     
+
+</script>

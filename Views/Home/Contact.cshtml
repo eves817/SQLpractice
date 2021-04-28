@@ -1,0 +1,115 @@
+﻿@{
+    ViewBag.Title = "Bootstrap3";
+}
+    <html>
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+
+        <div class="jumbotron">
+            @*jumbotron超大屏幕*@
+            <h1>@ViewBag.Title.</h1>
+            <p>Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile-first projects on the web.</p>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-4" style="background-color:lavender;">.col-xs-4</div>
+                <div class="col-xs-4" style="background-color:lavenderblush;">.col-xs-4</div>
+                <div class="col-xs-4" style="background-color:lavender;">.col-xs-4</div>
+            </div>
+            <p>blockquote引用段落:</p>
+            <blockquote>
+                <p>段落</p>
+                <p>段落</p>
+                <p>段落</p>
+                <footer>來自OOO的文章</footer>
+            </blockquote>
+            <div class="well">Basic Well</div>  @*class="well"區塊    -sm -lg*@
+            <p>Use <kbd>ctrl + p</kbd> to open the Print dialog box.</p>
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary">A</button>
+            <button type="button" class="btn btn-primary">B</button>
+            <button type="button" class="btn btn-primary">C</button>
+        </div>
+
+        <div class="col-sm-9">
+            <div class="well">
+                <h4>Dashboard</h4>
+                <p>Some text..</p>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="well">
+                        <h4>Users</h4>
+                        <p>1 Million</p>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="well">
+                        <h4>Pages</h4>
+                        <p>100 Million</p>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="well">
+                        <h4>Sessions</h4>
+                        <p>10 Million</p>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="well">
+                        <h4>Bounce</h4>
+                        <p>30%</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="well">
+                        <p>Text</p>
+                        <p>Text</p>
+                        <p>Text</p>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="well">
+                        <p>Text</p>
+                        <p>Text</p>
+                        <p>Text</p>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="well">
+                        <p>Text</p>
+                        <p>Text</p>
+                        <p>Text</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="well">
+                        <p>Text</p>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="well">
+                        <p>Text</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+
+    </body>
+    </html>
+ 
+    @*<div class="clearfix hidden-xs"></div>  清除float*@
